@@ -6,8 +6,6 @@ steps:
       - '-t'
       - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}'
       - '.'
-      - '-f'
-      - 'cmd/importer/Dockerfile'
   - name: gcr.io/cloud-builders/docker
     id: push-docker-image
     args: ['push', 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}']
