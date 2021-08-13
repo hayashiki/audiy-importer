@@ -34,9 +34,9 @@ steps:
       - TOPIC_NAME=$_TOPIC_NAME
 substitutions:
   _REGION: us-central1
-  _SERVICE_NAME: aveladio-importer
-  _GCS_INPUT_AUDIO_BUCKET: 'aveladio-audio-input'
-  _SLACK_BOT_TOKEN: 'xoxb-12376436915-1866945007218-6DwUHkdO49XkBdka2v7L44wQ'
-  _TOPIC_NAME: 'audioHandleTopic'
+  _SERVICE_NAME: audiy-importer
+  _GCS_INPUT_AUDIO_BUCKET: ''
+  _SLACK_BOT_TOKEN: ''
+  _TOPIC_NAME: ''
 images:
   - gcr.io/$PROJECT_ID/${_SERVICE_NAME}
