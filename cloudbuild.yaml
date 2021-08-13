@@ -1,0 +1,42 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    id: build-docker-image
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}'
+      - '.'
+      - '-f'
+      - 'cmd/importer/Dockerfile'
+  - name: gcr.io/cloud-builders/docker
+    id: push-docker-image
+    args: ['push', 'gcr.io/$PROJECT_ID/${_SERVICE_NAME}']
+  - name: gcr.io/cloud-builders/gcloud
+    id: deploy-cloud-run
+    args:
+      - run
+      - deploy
+      - ${_SERVICE_NAME}
+      - --image
+      - gcr.io/$PROJECT_ID/${_SERVICE_NAME}
+      - --region
+      - ${_REGION}
+      - --platform
+      - managed
+      - --allow-unauthenticated
+      - --update-env-vars
+      - GCP_PROJECT=$PROJECT_ID
+      - --update-env-vars
+      - GCS_INPUT_AUDIO_BUCKET=$_GCS_INPUT_AUDIO_BUCKET
+      - --update-env-vars
+      - SLACK_BOT_TOKEN=$_SLACK_BOT_TOKEN
+      - --update-env-vars
+      - TOPIC_NAME=$_TOPIC_NAME
+substitutions:
+  _REGION: us-central1
+  _SERVICE_NAME: aveladio-importer
+  _GCS_INPUT_AUDIO_BUCKET: 'aveladio-audio-input'
+  _SLACK_BOT_TOKEN: 'xoxb-12376436915-1866945007218-6DwUHkdO49XkBdka2v7L44wQ'
+  _TOPIC_NAME: 'audioHandleTopic'
+images:
+  - gcr.io/$PROJECT_ID/${_SERVICE_NAME}
