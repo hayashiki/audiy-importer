@@ -41,11 +41,12 @@ func main() {
 		log.Printf("defaulting to port %s", port)
 	}
 
+	r.Get("/", health)
 	r.Get("/health", health)
 	log.Print("Listening on port 8080")
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), r))
 }
 
 func health(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("v0.0.1")
+	fmt.Fprintf(w, "v0.0.1")
 }
