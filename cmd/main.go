@@ -42,6 +42,7 @@ func main() {
 	}
 
 	r.Get("/", health)
+	r.Post("/", health)
 	r.Get("/health", health)
 	log.Print("Listening on port 8080")
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), r))
