@@ -113,12 +113,13 @@ func (sh *Handler) run(payload *IssueDialogPayload) error {
 		URLPrivateDownload: payload.File.URLPrivateDownload,
 	}
 
-	pubsub, err := NewClient(os.Getenv("GCP_PROJECT"), os.Getenv("TOPIC_NAME"))
+	// TODO: from config
+	pubsub, err := NewClient(GetProject(), os.Getenv("TOPIC_NAME"))
 	if err != nil {
 		return err
 	}
 
-	log.Printf("message %+v", message)
+	log.Printf("project: %s, message %+v", GetProject(), message)
 	if err := pubsub.PublishAudioCreateMessage(ctx, message); err != nil {
 		log.Println(err)
 		return err

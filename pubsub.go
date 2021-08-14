@@ -38,27 +38,3 @@ func (c *pubsubClient) Publish(ctx context.Context, serialized []byte) error {
 	log.Printf("successfully published ID: %v", result)
 	return nil
 }
-
-//
-//
-//func configurePubsub(projectID string) (*pubsub.Client, error) {
-//
-//	PubsubTopicID := os.Getenv("PUBSUB_TOPIC")
-//	ctx := context.Background()
-//	client, err := pubsub.NewClient(ctx, projectID)
-//	if err != nil {
-//		return nil, err
-//	}
-//
-//	// Create the topic if it doesn't exist.
-//	if exists, err := client.Topic(PubsubTopicID).Exists(ctx); err != nil {
-//		return nil, err
-//	} else if !exists {
-//		if _, err := client.CreateTopic(ctx, PubsubTopicID); err != nil {
-//			return nil, err
-//		}
-//	}
-//	return client, nil
-//}
-
-
