@@ -11,6 +11,14 @@ resource "google_cloudbuild_trigger" "github_audiy-importer" {
   }
 
   filename = "cloudbuild.yaml"
+
+  substitutions = {
+    _REGION                 = var.region
+    _SERVICE_NAME           = local.service_name
+    _GCS_INPUT_AUDIO_BUCKET = local.env["GCS_INPUT_AUDIO_BUCKET"]
+    _SLACK_BOT_TOKEN        = local.env["SLACK_BOT_TOKEN"]
+    _TOPIC_NAME             = local.env["TOPIC_NAME"]
+  }
 }
 
 locals {
