@@ -1,5 +1,5 @@
 locals {
-  service_name       = "audiy-api"
+  service_name       = "audiy-importer"
   image_fullname_api = "gcr.io/${var.project}/${local.service_name}"
 
   env = {
